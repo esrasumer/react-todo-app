@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import api from "./../api/todos";
 
-export default function Form() {
+export default function Form({ fetchDatafromApi}) {
   const [inputText, setInputText] = useState("");
 
   async function submitTodoHandler(e) {
     e.preventDefault();
 
-    const respon = await api.post("/todos", {
+    const res = await api.post("/todos", {
       content: inputText,
       isCompleted: false,
       id: Math.ceil(Math.random() * 10000),
     });
 
     setInputText("");
+    fetchDatafromApi()
   }
 
   return (
